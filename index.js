@@ -18,7 +18,7 @@ app.get('/', (req,res) => {
   res.end('<h1>TEST</h1>')
 })
 
-app.use('pizza',pizzaRouter)
+app.use('/pizza',pizzaRouter)
 app.listen(PORT, () => {
   console.log(`App running on ${PORT}`)
 })

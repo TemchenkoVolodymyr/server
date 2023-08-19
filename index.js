@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const app = express()
 
-const PORT =  3000
+const PORT =  process.env.PORT || 3000
 
 mongoose.connect("mongodb+srv://temcenkovova8:brFMAZAjzkX4ighR@cluster0.4dgfzzn.mongodb.net/natours?retryWrites=true&w=majority",{
   useNewUrlParser:true,

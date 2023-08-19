@@ -51,12 +51,12 @@ exports.getAllHandler = Model => (async (req, res, next) => {
 
   const documents = new RequestFeatures(Model.find(filter), req.query).filter().sort().fields().pagination();
   let doc = await documents.query
-
+console.log(doc)
   // SEND REQUEST
   const result = await doc
 
   res.status(200).json({
-    status: 'Success',
+    status: 'sss',
     results: result.length,
     data: {
       result

@@ -5,7 +5,7 @@ const app = express()
 
 const PORT =  process.env.PORT || 3000
 
-mongoose.connect(process.env.MONGODB_URI,{
+mongoose.connect("mongodb+srv://temcenkovova8:brFMAZAjzkX4ighR@cluster0.4dgfzzn.mongodb.net/natours?retryWrites=true&w=majority",{
   useNewUrlParser:true,
   useCreateIndex:true,
   useFindAndModify:false,
@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGODB_URI,{
 const pizzaRouter = require('./Routers/Pizza/PizzaRouts')
 const socialRouter = require('./Routers/SocialCosmos/SocialRouts')
 
-pp.get('/', (req,res) => {
+app.get('/', (req,res) => {
   res.end('<h1>TEST</h1>')
 })
 

@@ -28,10 +28,10 @@ const limiter = rateLimit({
 
 
 app.use('/',limiter)
-app.all('*', (req, res,next) => {
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
-  next(new ErrorHandler(`Url with this path ${req.originalUrl} doesnt exist`),404);
-})
+// app.all('*', (req, res,next) => {
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
+//   next(new ErrorHandler(`Url with this path ${req.originalUrl} doesnt exist`),404);
+// })
 app.get('/', (req,res) => {
   res.end('<h1>TEST</h1>')
 })

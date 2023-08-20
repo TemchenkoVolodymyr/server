@@ -8,10 +8,8 @@ const auth = require('../../APIFeatures/Authorization')
 
 socialRouter.route('/')
   .get(socialFunc.getAllSocial)
-  .post(socialFunc.createSocial)
-  .delete(socialFunc.deleteSocial)
-socialRouter.route('/signup')
   .post(auth.signup)
+  .delete(socialFunc.deleteSocial)
 
 
 

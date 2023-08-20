@@ -1,6 +1,6 @@
 
 
-const Pastas = require('../../modulesDatabase/Pizza/itemsPastaModules')
+const Pastas = require('../../modules/Pizza/itemsPastaModules')
 const factory = require("../HandlerFactory");
 
 

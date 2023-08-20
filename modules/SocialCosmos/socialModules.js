@@ -8,7 +8,5 @@ const socialSchema = new mongoose.Schema({
   date:String
 })
 
-
 const Social = mongoose.model("socials", socialSchema);
-
 module.exports = Social

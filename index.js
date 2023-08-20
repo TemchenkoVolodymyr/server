@@ -14,11 +14,14 @@ mongoose.connect(process.env.MONGODB_URI,{
 
 
 const pizzaRouter = require('./Routers/Pizza/PizzaRouts')
-app.get('/', (req,res) => {
+const socialRouter = require('./Routers/SocialCosmos/SocialRouts')
+
+pp.get('/', (req,res) => {
   res.end('<h1>TEST</h1>')
 })
 
 app.use('/pizza',pizzaRouter)
+app.use('/social',socialRouter)
 app.listen(PORT, () => {
   console.log(`App running on ${PORT}`)
 })

@@ -23,17 +23,17 @@ mongoose.connect("mongodb+srv://temcenkovova8:brFMAZAjzkX4ighR@cluster0.4dgfzzn.
 const pizzaRouter = require('./Routers/Pizza/PizzaRouts')
 const socialRouter = require('./Routers/SocialCosmos/SocialRouts')
 const ErrorHandler = require("./APIFeatures/ErrorHandler");
-const rateLimit = require("express-rate-limit");
+// const rateLimit = require("express-rate-limit");
 
 
-const limiter = rateLimit({
-  max: 200,
-  windowMs:60*60*1000,
-  message:"Too many requests, try again later"
-});
+// const limiter = rateLimit({
+//   max: 200,
+//   windowMs:60*60*1000,
+//   message:"Too many requests, try again later"
+// });
 
 
-app.use('/',limiter)
+// app.use('/',limiter)
 app.get('/', (req,res) => {
   res.end('<h1>TEST</h1>')
 })

@@ -27,6 +27,7 @@ const socialSchema = new mongoose.Schema({
   date:String
 })
 
+
 socialSchema.pre('save', async function(next) {
 
   // if (!this.isModified('password')) return next();

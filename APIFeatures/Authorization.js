@@ -37,6 +37,9 @@ exports.signup = async (req,res,next) => {
     passwordConfirm:req.body.passwordConfirm,
     date:req.body.date
   })
+  if(newUser.errors){
+    return next(new AppError('Wrong'))
+  }
 
   createSendToken(newUser,201,res)
 }

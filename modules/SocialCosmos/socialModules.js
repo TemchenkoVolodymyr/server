@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const socialSchema = new mongoose.Schema({
-  name:String,
+  name:{
+    type: String,
+    required: [true, "The user must have a name"],
+    unique: true,
+    trim: true
+  },
   password:{
     type: String,
     required: [true, 'Please provide a password'],
     minlength: 6,
-    select: false
+    trim: true,
   },
   confirmPassword:{
     type: String,
@@ -32,12 +37,7 @@ const socialSchema = new mongoose.Schema({
 
 socialSchema.pre('save', async function(next) {
 
-  // if (!this.isModified('password')) return next();
-
-
   this.password = await bcrypt.hash(this.password, 12);
-
-
   this.passwordConfirm = undefined;
   next();
 });

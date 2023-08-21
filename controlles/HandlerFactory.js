@@ -56,7 +56,7 @@ console.log(doc)
   const result = await doc
 
   res.status(200).json({
-    status: 'sss',
+    status: 'success',
     results: result.length,
     data: {
       result

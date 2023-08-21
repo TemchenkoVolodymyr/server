@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require("mongoose");
 const cors = require('cors');
 const app = express()
-
+const helmet = require('helmet');
 const PORT =  process.env.PORT || 3000
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -20,7 +20,7 @@ mongoose.connect("mongodb+srv://temcenkovova8:brFMAZAjzkX4ighR@cluster0.4dgfzzn.
   useFindAndModify:false,
 }).then(() => console.log('DB connection successful'));
 
-
+app.use(helmet());
 
 const pizzaRouter = require('./Routers/Pizza/PizzaRouts')
 const socialRouter = require('./Routers/SocialCosmos/SocialRouts')

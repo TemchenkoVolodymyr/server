@@ -32,17 +32,6 @@ app.all('*', (req, res,next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
   next(new ErrorHandler(`Url with this path ${req.originalUrl} doesnt exist`),404);
 })
-app.use((err,req,res,next) => {
-  err.statusCode = err.statusCode || 500
-  err.status = err.status || 'error';
-
-  res.status(err.statusCode).json({
-    status:err.status,
-    message:err.message
-  })
-
-  next()
-})
 app.listen(PORT, () => {
   console.log(`App running on ${PORT}`)
 })

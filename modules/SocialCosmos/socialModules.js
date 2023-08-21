@@ -38,7 +38,7 @@ const socialSchema = new mongoose.Schema({
 socialSchema.pre('save', async function(next) {
 
   this.password = await bcrypt.hash(this.password, 12);
-  this.passwordConfirm = undefined;
+  // this.passwordConfirm = undefined;
   next();
 });
 

@@ -60,3 +60,19 @@ exports.login = catchAsync(async (req,res,next) => {
   createSendToken(user, 200, res);
   next()
 })
+
+exports.editUser = catchAsync(async (req,res,next) => {
+  const doc = await Social.findByIdAndUpdate(req.params.id,req.body,{
+    new:true,runValidators:true
+  })
+  if(!doc) {
+    return next(new AppError('No document found by id to update', 400))
+  }
+
+  res.status(200).json({
+    status:'Success',
+    data:{
+      data:doc
+    }
+  })
+})

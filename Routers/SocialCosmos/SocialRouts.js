@@ -13,7 +13,7 @@ socialRouter.route('/')
 
 
 socialRouter.post('/login',auth.login);
-
+socialRouter.patch('/:id',auth.editUser)
 
 
 module.exports = socialRouter;

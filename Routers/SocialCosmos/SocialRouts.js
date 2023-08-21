@@ -10,8 +10,10 @@ socialRouter.route('/')
   .get(socialFunc.getAllSocial)
   .post(auth.signup)
   .delete(socialFunc.deleteSocial)
-socialRouter.route('/login')
-  .post(auth.login)
+
+
+socialRouter.post('/login',auth.login);
+
 
 
 module.exports = socialRouter;

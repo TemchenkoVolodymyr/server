@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const isBoolean = require("validator/es/lib/isBoolean");
 const socialSchema = new mongoose.Schema({
   name:{
     type: String,

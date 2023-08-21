@@ -19,17 +19,8 @@ app.use(helmet());
 const pizzaRouter = require('./Routers/Pizza/PizzaRouts')
 const socialRouter = require('./Routers/SocialCosmos/SocialRouts')
 const ErrorHandler = require("./APIFeatures/ErrorHandler");
-const rateLimit = require("express-rate-limit");
 
 
-const limiter = rateLimit({
-  max: 500,
-  windowMs:60*60*1000,
-  message:"Too many requests, try again later"
-});
-
-
-app.use('/',limiter)
 app.get('/', (req,res) => {
   res.end('<h1>TEST</h1>')
 })

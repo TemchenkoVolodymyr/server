@@ -18,8 +18,6 @@ const socialSchema = new mongoose.Schema({
     required: [true, 'Please confirm your password'],
     validate: {
       validator: function(el) {
-        console.log(el)
-        console.log(this.password)
         return el === this.password;
       },
       message: 'Passwords are not the same!'
@@ -38,7 +36,7 @@ const socialSchema = new mongoose.Schema({
 socialSchema.pre('save', async function(next) {
 
   this.password = await bcrypt.hash(this.password, 12);
-  // this.passwordConfirm = undefined;
+  this.passwordConfirm = undefined;
   next();
 });
 

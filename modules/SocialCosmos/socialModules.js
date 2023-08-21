@@ -13,6 +13,8 @@ const socialSchema = new mongoose.Schema({
     required: [true, 'Please confirm your password'],
     validate: {
       validator: function(el) {
+        console.log(el)
+        console.log(this.password)
         return el === this.password;
       },
       message: 'Passwords are not the same!'

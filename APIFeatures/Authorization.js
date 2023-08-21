@@ -48,6 +48,9 @@ exports.login = async (req,res,next) => {
     return next(new AppError('Please provide email and password',400))
   }
   const user = await Social.findOne({email}).select('+password');
+  console.log(email)
+  console.log(password)
+  console.log(user.password)
 
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));

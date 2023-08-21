@@ -30,12 +30,12 @@ const createSendToken = (user,statusCode,req,res) => {
 }
 
 exports.signup = async (req,res,next) => {
-  console.log(req.body)
   const newUser = await Social.create({
     name:req.body.name,
     email:req.body.email,
     password:req.body.password,
-    passwordConfirm:req.body.passwordConfirm
+    passwordConfirm:req.body.passwordConfirm,
+    date:req.body.date
   })
 
   createSendToken(newUser,201,res)

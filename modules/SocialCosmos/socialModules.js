@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const isBoolean = require("validator/es/lib/isBoolean");
 const socialSchema = new mongoose.Schema({
   name:{
     type: String,
@@ -29,14 +30,15 @@ const socialSchema = new mongoose.Schema({
     unique: true,
     lowercase: true,
   },
-  date:String
+  date:String,
+  isOnline:Boolean
 })
 
 
 socialSchema.pre('save', async function(next) {
 
   this.password = await bcrypt.hash(this.password, 12);
-  this.passwordConfirm = undefined;
+  this.confirmPassword = undefined;
   next();
 });
 

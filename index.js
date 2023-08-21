@@ -49,7 +49,9 @@ app.all('*', (req, res,next) => {
 })
 
 app.use(function (err,req,res,next){
-  res.status(500).send(err)
+  if(err){
+    next(err)
+  }
 })
 app.listen(PORT, () => {
   console.log(`App running on ${PORT}`)

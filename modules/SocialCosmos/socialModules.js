@@ -2,9 +2,28 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const socialSchema = new mongoose.Schema({
   name:String,
-  password:String,
-  confirmPassword:String,
-  email:String,
+  password:{
+    type: String,
+    required: [true, 'Please provide a password'],
+    minlength: 6,
+    select: false
+  },
+  confirmPassword:{
+    type: String,
+    required: [true, 'Please confirm your password'],
+    validate: {
+      validator: function(el) {
+        return el === this.password;
+      },
+      message: 'Passwords are not the same!'
+    }
+  },
+  email:{
+    type: String,
+    required: [true, 'Please provide your email'],
+    unique: true,
+    lowercase: true,
+  },
   date:String
 })
 

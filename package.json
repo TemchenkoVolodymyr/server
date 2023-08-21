@@ -25,6 +25,7 @@
     "validator": "^13.9.0",
     "xss-clean": "^0.1.4",
     "nodemon": "^2.0.15",
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "bcryptjs": "^2.4.3"
   }
 }

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const Social = require('../modules/SocialCosmos/socialModules')
-
+const AppError = require('../APIFeatures/appError')
 const signToken = (id) => {
   return jwt.sign({id},"my-ultra-secure-and-ultra-long-secret",{
     expiresIn:"90d"
@@ -39,4 +39,18 @@ exports.signup = async (req,res,next) => {
   })
 
   createSendToken(newUser,201,res)
+}
+
+exports.login = async (req,res,next) => {
+  const {email , password} = req.body;
+
+  if(!email || !password) {
+    return next(new AppError('Please provide email and password',400))
+  }
+  const user = await Social.findOne({email}).select('+password');
+
+  if (!user || !(await user.correctPassword(password, user.password))) {
+    return next(new AppError('Incorrect email or password', 401));
+  }
+  createSendToken(user, 200, req, res);
 }

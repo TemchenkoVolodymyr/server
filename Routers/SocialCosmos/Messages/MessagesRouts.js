@@ -6,7 +6,7 @@ const messageFunc = require('../../../controlles/SocialCosmos/Messages/messagesF
 
 messageRouter.route('/')
   .get(messageFunc.getAllMessages)
-  .put(messageFunc.createMessage)
+  .post(messageFunc.createMessage)
 
 
 

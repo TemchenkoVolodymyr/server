@@ -18,6 +18,7 @@ app.use(helmet());
 
 const pizzaRouter = require('./Routers/Pizza/PizzaRouts')
 const socialRouter = require('./Routers/SocialCosmos/SocialRouts')
+const messageRouter = require('./Routers/SocialCosmos/Messages/MessagesRouts')
 const ErrorHandler = require("./APIFeatures/ErrorHandler");
 
 
@@ -27,6 +28,7 @@ app.get('/', (req,res) => {
 
 app.use('/pizza',pizzaRouter)
 app.use('/social',socialRouter)
+app.use('/message',messageRouter)
 
 app.all('*', (req, res,next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");

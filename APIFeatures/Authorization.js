@@ -76,3 +76,23 @@ exports.editUser = catchAsync(async (req,res,next) => {
     }
   })
 })
+
+exports.getAllUsers = catchAsync(async (req,res,next) => {
+
+  const documents = Social.find()
+
+  if(!documents){
+    next(new AppError("No documents",400))
+  }
+  let doc = await documents.query
+
+  const result = await doc
+
+  res.status(200).json({
+    status:"Success",
+    results:result.length,
+    data:{
+      result
+    }
+  })
+})

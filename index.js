@@ -1,14 +1,14 @@
 const express = require('express')
 const mongoose = require("mongoose");
-const cors = require('cors');
+const corss = require('cors');
 const app = express()
 const helmet = require('helmet');
 const PORT = process.env.PORT || 3000
 
-const http = require('http');
-const server = http.createServer(app)
+const {Server} = require('socket.io')
 
-const  io = require('socket.io')(server);
+const io = new Server({cors:"*"});
+
 
 io.on('connection',(socket) => {
 console.log("new connection" ,socket.id)
@@ -19,8 +19,8 @@ console.log("new connection" ,socket.id)
 
 
 
-app.use(cors());
-app.options('*', cors());
+app.use(corss());
+app.options('*', corss());
 app.use(express.json())
 mongoose.connect("mongodb+srv://temcenkovova8:brFMAZAjzkX4ighR@cluster0.4dgfzzn.mongodb.net/natours?retryWrites=true&w=majority", {
   useNewUrlParser: true,
@@ -48,7 +48,7 @@ app.all('*', (req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
   next(new ErrorHandler(`Url with this path ${req.originalUrl} doesnt exist`), 404);
 })
-console.log(PORT)
+console.log("My port is ",PORT)
 io.listen(PORT, () => {
   console.log(`App running on ${PORT}`)
 })

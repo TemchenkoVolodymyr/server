@@ -51,6 +51,6 @@ app.all('*', (req, res, next) => {
   next(new ErrorHandler(`Url with this path ${req.originalUrl} doesnt exist`), 404);
 })
 console.log("My port is ",PORT)
-io.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`App running on ${PORT}`)
 })

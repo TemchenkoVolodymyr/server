@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
     io.emit("getOnlineUsers", onlineUsers)
   });
   socket.on('sendMessage',(message) => {
+    console.log(message)
     const user = onlineUsers.find(user => user.userId === message.recipientId)
     console.log("found user!!!!!",user)
     if(user) {

@@ -52,6 +52,7 @@ exports.getAllHandler = Model => (async (req, res, next) => {
   if(req.query.id2) filter = {idUser:req.query.id2}
 
   const documents = new RequestFeatures(Model.find(filter), req.query).filter().sort().fields().pagination();
+  console.log("DOCUMENTS",documents)
   let doc = await documents.query
 console.log("My found document" ,doc)
   // SEND REQUEST

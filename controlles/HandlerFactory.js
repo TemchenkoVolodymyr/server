@@ -48,13 +48,13 @@ exports.getAllHandler = Model => (async (req, res, next) => {
   let filter = {};
   if (req.params.tourId) filter = { tour: req.params.tourId };
   if(req.params.id) filter = {idUser:req.params.id}
-  console.log(req.params)
   if(req.params.id1) filter = {recipientId : req.params.id1}
   if(req.params.id2) filter = {idUser:req.params.id2}
-
+  console.log("request params are " ,req.params)
+  console.log('request query', req.query)
   const documents = new RequestFeatures(Model.find(filter), req.query).filter().sort().fields().pagination();
   let doc = await documents.query
-console.log(doc)
+console.log("My found document" ,doc)
   // SEND REQUEST
   const result = await doc
 

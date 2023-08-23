@@ -6,7 +6,7 @@ class RequestFeatures {
 
 
   filter() {
-    console.log(...this.queryString)
+    console.log(this.queryString)
     const queryObj = {...this.queryString};
     const uniqWords = ["page", "sort", "limit", "fields"]; // Список который мне надо удалить из req.query .
     uniqWords.forEach(el => delete queryObj[el]);

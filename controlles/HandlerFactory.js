@@ -73,9 +73,7 @@ exports.getAllHandlerMessages = Model => (async (req, res, next) => {
   let filter = {};
   if (req.query.recipientId && req.query.idUser) filter = {recipientId: req.query.recipientId, idUser: req.query.idUser}
 
-  const documents = Model.find({
-    $and:[{filter}]
-  })
+  const documents = new RequestFeatures(Model.find({$and:[{filter}]}), req.query).filter().sort().fields().pagination();
   console.log("DOCUMENTS", documents)
   let doc = await documents.query
   console.log("My found document", doc)

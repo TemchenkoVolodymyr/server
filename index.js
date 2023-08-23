@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000
 
 const { Server } = require('socket.io');
 
-const io = new Server({cors:"*"});
+const io = new Server(app);
 io.on('connection',(socket) => {
 console.log("new connection" ,socket.id)
 })

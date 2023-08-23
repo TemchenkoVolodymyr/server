@@ -9,10 +9,10 @@ const http = require('http')
 const {Server} = require('socket.io')
 const server = http.createServer(app)
 
-const io = new Server(server,{
-  cors:{
-    origin:"*",
-    methods:["GET","POST","DELETE","PATCH"]
+const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST", "DELETE", "PATCH"]
   }
 });
 
@@ -28,9 +28,13 @@ io.on('connection', (socket) => {
       socketId: socket.id
     });
     console.log('onlineUsers', onlineUsers)
-    io.emit("getOnlineUsers",onlineUsers)
+    io.emit("getOnlineUsers", onlineUsers)
   })
+  socket.on('disconnect', () => {
+    onlineUsers = onlineUsers.filter(user => user.socketId !== socket.id)
+    io.emit("getOnlineUsers", onlineUsers)
 
+  })
 })
 
 

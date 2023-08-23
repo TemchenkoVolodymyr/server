@@ -3,7 +3,8 @@ const messagesSchema = new mongoose.Schema({
   idUser: String,
   message: String,
   date: String,
-  author:String
+  author:String,
+  recipientId:String
 
 })
 

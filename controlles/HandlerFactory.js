@@ -1,3 +1,4 @@
+
 const RequestFeatures = require('../APIFeatures/ApiFeatures')
 exports.deleteHandler = Model => (async (req, res, next) => {
 
@@ -45,14 +46,36 @@ exports.createHandler = Model => (async (req, res, next) => {
 exports.getAllHandler = Model => (async (req, res, next) => {
 
   let filter = {};
-  // if (req.params.tourId) filter = { tour: req.params.tourId };
-  // if(req.params.id) filter = {idUser:req.params.id}
-  if (req.query.recipientId && req.query.idUser) filter = {recipientId: req.query.recipientId, idUser: req.query.idUser}
+  if (req.params.tourId) filter = { tour: req.params.tourId };
+  if(req.params.id) filter = {idUser:req.params.id}
+  if(req.query.id1 && req.query.id2) filter = {recipientId : req.query.id1,idUser:req.query.id2}
   // if(req.query.id2) filter = {idUser:req.query.id2}
+
+  console.log(filter)
+  const documents = new RequestFeatures(Model.find(filter), req.query).filter().sort().fields().pagination();
+  console.log("DOCUMENTS",documents)
+  let doc = await documents.query
+console.log("My found document" ,doc)
+  // SEND REQUEST
+  const result = await doc
+
+  res.status(200).json({
+    status: 'success',
+    results: result.length,
+    data: {
+      result
+    }
+  })
+})
+
+exports.getAllHandlerMessages = Model => (async (req, res, next) => {
+
+  let filter = {};
+  if (req.query.recipientId && req.query.idUser) filter = {recipientId: req.query.recipientId, idUser: req.query.idUser}
 
   const documents = Model.find({
     $and:[{filter}]
-  }) //, req.query).filter().sort().fields().pagination();
+  })
   console.log("DOCUMENTS", documents)
   let doc = await documents.query
   console.log("My found document", doc)
@@ -68,14 +91,13 @@ exports.getAllHandler = Model => (async (req, res, next) => {
   })
 })
 
-
 exports.getOneHandler = (Model, populateOptions) => (async (req, res, next) => {
 
   const param = req.params.id
   let query = Model.findById(param);
 
   if (populateOptions) {
-    query = query.populate(populateOptions)
+    query =  query.populate(populateOptions)
   }
   const doc = await query
 

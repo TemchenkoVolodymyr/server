@@ -1,4 +1,3 @@
-
 const RequestFeatures = require('../APIFeatures/ApiFeatures')
 exports.deleteHandler = Model => (async (req, res, next) => {
 
@@ -46,16 +45,16 @@ exports.createHandler = Model => (async (req, res, next) => {
 exports.getAllHandler = Model => (async (req, res, next) => {
 
   let filter = {};
-  if (req.params.tourId) filter = { tour: req.params.tourId };
-  if(req.params.id) filter = {idUser:req.params.id}
-  if(req.query.id1 && req.query.id2) filter = {recipientId : req.query.id1,idUser:req.query.id2}
+  // if (req.params.tourId) filter = { tour: req.params.tourId };
+  // if(req.params.id) filter = {idUser:req.params.id}
+  if (req.query.id1 && req.query.id2) filter = {recipientId: req.query.id1, idUser: req.query.id2}
   // if(req.query.id2) filter = {idUser:req.query.id2}
 
   console.log(filter)
-  const documents = new RequestFeatures(Model.find(filter)) //, req.query).filter().sort().fields().pagination();
-  console.log("DOCUMENTS",documents)
+  const documents = Model.find(filter) //, req.query).filter().sort().fields().pagination();
+  console.log("DOCUMENTS", documents)
   let doc = await documents.query
-console.log("My found document" ,doc)
+  console.log("My found document", doc)
   // SEND REQUEST
   const result = await doc
 
@@ -75,7 +74,7 @@ exports.getOneHandler = (Model, populateOptions) => (async (req, res, next) => {
   let query = Model.findById(param);
 
   if (populateOptions) {
-    query =  query.populate(populateOptions)
+    query = query.populate(populateOptions)
   }
   const doc = await query
 

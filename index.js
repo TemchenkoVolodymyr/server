@@ -5,10 +5,12 @@ const app = express()
 const helmet = require('helmet');
 const PORT = process.env.PORT || 3000
 
+const http = require('http');
+const server = http.createServer(app)
 
 const { Server } = require('socket.io');
 
-const io = new Server(app);
+const io = new Server(server);
 io.on('connection',(socket) => {
 console.log("new connection" ,socket.id)
 })

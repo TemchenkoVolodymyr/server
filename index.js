@@ -4,10 +4,12 @@ const corss = require('cors');
 const app = express()
 const helmet = require('helmet');
 const PORT = process.env.PORT || 3000
+const http = require('http')
 
 const {Server} = require('socket.io')
+const server = http.createServer(app)
 
-const io = new Server(app);
+const io = new Server(server);
 
 
 io.on('connection',(socket) => {

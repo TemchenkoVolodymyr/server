@@ -8,9 +8,8 @@ const PORT = process.env.PORT || 3000
 const http = require('http');
 const server = http.createServer(app)
 
-const { Server } = require('socket.io');
+const  io = require('socket.io')(server);
 
-const io = new Server(server);
 io.on('connection',(socket) => {
 console.log("new connection" ,socket.id)
 })
@@ -49,6 +48,7 @@ app.all('*', (req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
   next(new ErrorHandler(`Url with this path ${req.originalUrl} doesnt exist`), 404);
 })
+console.log(PORT)
 io.listen(PORT, () => {
   console.log(`App running on ${PORT}`)
 })

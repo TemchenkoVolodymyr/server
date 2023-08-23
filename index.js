@@ -19,7 +19,6 @@ const io = new Server(server, {
 let onlineUsers = []
 
 io.on('connection', (socket) => {
-  console.log("new connection", socket.id)
 
   socket.on('addNewUser', (userId) => {
     !onlineUsers.some(user => user.userId === userId) &&
@@ -27,8 +26,14 @@ io.on('connection', (socket) => {
       userId,
       socketId: socket.id
     });
-    console.log('onlineUsers', onlineUsers)
     io.emit("getOnlineUsers", onlineUsers)
+  });
+  socket.on('sendMessage',(message) => {
+    const user = onlineUsers.find(user => user.userId === message.recipientId)
+    if(user) {
+      io.to(user.socketId).emit("getMessage",message)
+    }
+
   })
   socket.on('disconnect', () => {
     onlineUsers = onlineUsers.filter(user => user.socketId !== socket.id)

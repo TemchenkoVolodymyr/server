@@ -5,9 +5,13 @@ const app = express()
 const helmet = require('helmet');
 const PORT = process.env.PORT || 3000
 
-const server = require('http').createServer(app)
-const io = require('socket.io')(server);
-io.on('connection', () =>{})
+
+const { Server } = require('socket.io');
+
+const io = new Server({cors:"https://socialcosmos.magicmovie.fun/"});
+io.on('connection',(socket) => {
+console.log("new connection" ,socket.id)
+})
 
 
 
@@ -43,6 +47,6 @@ app.all('*', (req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");
   next(new ErrorHandler(`Url with this path ${req.originalUrl} doesnt exist`), 404);
 })
-server.listen(PORT, () => {
+io.listen(PORT, () => {
   console.log(`App running on ${PORT}`)
 })

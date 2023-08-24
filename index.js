@@ -30,7 +30,8 @@ io.on('connection', (socket) => {
   });
   //add message
   socket.on('sendMessage', (message) => {
-
+console.log(onlineUsers)
+    console.log(message)
     const user = onlineUsers.find(user => user.userId === message.recipientId)
     console.log(user)
     if (user) {

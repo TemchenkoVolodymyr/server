@@ -28,15 +28,17 @@ io.on('connection', (socket) => {
     });
     io.emit("getOnlineUsers", onlineUsers)
   });
+
   //add message
   socket.on('sendMessage', (message) => {
-console.log(onlineUsers)
-    console.log(message)
+
     const user = onlineUsers.find(user => user.userId === message.recipientId)
-    console.log(user)
+
     if (user) {
-      io.to(user.socketId).emit("getMessage", message)
-      console.log(message)
+      console.log(user)
+      // io.to(user.socketId).emit("getMessage", message)
+      socket.broadcast.emit("receive_message", message)
+
     }
 
   })

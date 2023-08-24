@@ -28,10 +28,10 @@ io.on('connection', (socket) => {
     });
     io.emit("getOnlineUsers", onlineUsers)
   });
-  socket.on('sendMessage',(message) => {
+  socket.on('sendMessage', (message) => {
     const user = onlineUsers.find(user => user.userId === message.recipientId)
-    if(user) {
-      io.to(user.socketId).emit("getMessage",message)
+    if (user) {
+      io.to(user.socketId).emit("getMessage", message)
     }
 
   })
@@ -58,7 +58,7 @@ const pizzaRouter = require('./Routers/Pizza/PizzaRouts')
 const socialRouter = require('./Routers/SocialCosmos/SocialRouts')
 const messageRouter = require('./Routers/SocialCosmos/Messages/MessagesRouts')
 const ErrorHandler = require("./APIFeatures/ErrorHandler");
-
+const dialogsRouter = require('./Routers/SocialCosmos/Messages/Dialogs/DialogsRouters')
 
 app.get('/', (req, res) => {
   res.end('<h1>TEST</h1>')
@@ -67,6 +67,7 @@ app.get('/', (req, res) => {
 app.use('/pizza', pizzaRouter)
 app.use('/social', socialRouter)
 app.use('/message', messageRouter)
+app.use('/dialogs', dialogsRouter)
 
 app.all('*', (req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH");

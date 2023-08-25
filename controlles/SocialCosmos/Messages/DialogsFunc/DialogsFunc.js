@@ -2,11 +2,13 @@ const dialogsModules = require('../../../../modules/SocialCosmos/Messages/Dialog
 
 const createDialog = async (req, res) => {
   const {chatId, senderId, text} = req.body
-
+  console.log("BODY!!!!!!!!!!!!!!!!!!")
+console.log(req.body)
   const dialogs = new dialogsModules({
     chatId, senderId, text
   })
-
+  console.log("DIALOGS!!!!!!!!!!!!")
+console.log(dialogs)
   try {
     const response = await dialogs.save()
     res.status(200).json(response)

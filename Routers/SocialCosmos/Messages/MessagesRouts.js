@@ -13,6 +13,7 @@ messageRouter.route('/:userId')
 messageRouter.route('/find/:firstId/:secondId')
   .get(messageFunc.findChat)
 
-
+messageRouter.route('/findAllChats/:firstId/:secondId')
+  .get(messageFunc.findCurrentUserChats)
 
 module.exports = messageRouter;

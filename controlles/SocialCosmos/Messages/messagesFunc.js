@@ -61,3 +61,17 @@ console.log(secondId)
   }
 }
 
+exports.findCurrentUserChats = async (req ,res) => {
+  const {firstId,secondId} = req.params;
+
+  try{
+    const chats = await Messages.find({
+      members:{$all:[firstId,secondId]}
+    })
+    res.status(200).json(chats)
+  }catch (error) {
+    console.log(error)
+    res.status(500).json(error)
+  }
+}
+

@@ -10,6 +10,7 @@ const mongoose = require('mongoose');
 const messagesSchema = new mongoose.Schema(
   {
     members: Array,
+    interlocutor:Array,
   },
   {
     timestamps: true

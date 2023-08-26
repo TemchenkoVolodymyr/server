@@ -6,7 +6,7 @@ exports.createMessage = factory.createHandler(Messages);
 exports.deleteMessage = factory.deleteHandler(Messages);
 
 exports.createChat = async (req, res) => {
-  const {firstId, secondId , name , photo} = req.body
+  const {firstId, secondId , name , photo , idUser} = req.body
 
   try {
     const chat = await Messages.findOne({
@@ -16,7 +16,7 @@ exports.createChat = async (req, res) => {
 
     const newChat = new Messages({
       members: [firstId, secondId],
-      interlocutor:[name,photo]
+      interlocutor:[name,photo,idUser]
     })
 
     const response = await newChat.save()

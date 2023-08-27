@@ -16,7 +16,7 @@ console.log(req.body)
 
     const newChat = new Messages({
       members: [firstId, secondId],
-      interlocutor:[name,photo,idUser , currentUserName]
+      interlocutor:[name,photo,idUser ,currentUserName]
     })
 
     const response = await newChat.save()

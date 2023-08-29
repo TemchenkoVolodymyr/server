@@ -8,7 +8,7 @@ const pizzaFunc = require('../../controlles/Pizza/pizzaFuncs')
 
 pizzaRouter.route('/')
   .get(pizzaFunc.getAllPizzas)
-
+  .post(pizzaFunc.createPizza)
 
 
 
